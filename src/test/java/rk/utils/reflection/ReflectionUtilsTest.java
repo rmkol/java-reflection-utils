@@ -59,8 +59,8 @@ class ReflectionUtilsTest {
     }
 
     @Test
-    void getAllClassFields() {
-        List<Field> fields = ReflectionUtils.getAllClassFields(Customer.class);
+    void getAllFieldsOfClass() {
+        List<Field> fields = ReflectionUtils.getAllFieldsOf(Customer.class);
         assertEquals(6, fields.size(), "wrong number of fields");
         assertTrue(fields.stream().anyMatch(field -> field.getName().equals("id")));
         assertTrue(fields.stream().anyMatch(field -> field.getName().equals("name")));
@@ -69,13 +69,13 @@ class ReflectionUtilsTest {
         assertTrue(fields.stream().anyMatch(field -> field.getName().equals("CODE")));
         assertTrue(fields.stream().anyMatch(field -> field.getName().equals("CUSTOMER_CODE")));
 
-        fields = ReflectionUtils.getAllClassFields(User.class);
+        fields = ReflectionUtils.getAllFieldsOf(User.class);
         assertEquals(3, fields.size(), "wrong number of fields");
         assertTrue(fields.stream().anyMatch(field -> field.getName().equals("id")));
         assertTrue(fields.stream().anyMatch(field -> field.getName().equals("name")));
         assertTrue(fields.stream().anyMatch(field -> field.getName().equals("CODE")));
 
-        fields = ReflectionUtils.getAllClassFields(ClassWithNoFields.class);
+        fields = ReflectionUtils.getAllFieldsOf(ClassWithNoFields.class);
         assertEquals(0, fields.size(), "wrong number of fields");
     }
 
