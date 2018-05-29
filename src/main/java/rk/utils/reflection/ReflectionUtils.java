@@ -7,9 +7,25 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
-//todo doc
+import static java.util.Objects.requireNonNull;
+
+/**
+ * A collection of utility methods which can
+ * simplify working with Java Reflection API.
+ */
 public class ReflectionUtils {
-    //todo add test
+    /**
+     * Gets a class field with a specific name.
+     * This method may be more convenient in some cases
+     * than {@link Class#getField(String)} because it doesn't throw
+     * a checked exception.
+     * NOTE: method won't access private fields of an inherited class.
+     *
+     * @param name   field name
+     * @param class_ field holder class
+     * @return {@link Field}
+     * @throws FieldNotFoundError if a field with provided name wasn't found
+     */
     public static Field getFieldByName(String name, Class class_) throws FieldNotFoundError {
         try {
             return class_.getField(name);
@@ -18,7 +34,16 @@ public class ReflectionUtils {
         }
     }
 
-    //todo add test
+    /**
+     * Unlocks the {@code field} and sets it's {@code value}.
+     * Also, this method may be more convenient in some cases
+     * than {@link Field#set} because it doesn't throw a checked
+     * exception.
+     *
+     * @param field       a field for which new value should be set
+     * @param fieldHolder field holder object
+     * @param value       new field value
+     */
     public static void setFieldValue(Field field, Object fieldHolder, Object value) {
         try {
             field.setAccessible(true);
@@ -28,11 +53,8 @@ public class ReflectionUtils {
         }
     }
 
-    public static Object getFieldValue(String fieldName, Object fieldHolder)
-            throws FieldNotFoundError {
-        if (fieldHolder == null) {
-            throw new IllegalArgumentException("field holder cannot be null");
-        }
+    public static Object getFieldValue(String fieldName, Object fieldHolder) throws FieldNotFoundError {
+        requireNonNull(fieldHolder, "field holder cannot be null");
         Optional<Field> field = findFieldByName(fieldName, fieldHolder);
         if (field.isPresent()) {
             return getFieldValue(field.get(), fieldHolder);
@@ -41,9 +63,7 @@ public class ReflectionUtils {
     }
 
     public static Object getFieldValue(Field field, Object fieldHolder) {
-        if (fieldHolder == null) {
-            throw new IllegalArgumentException("field holder cannot be null");
-        }
+        requireNonNull(fieldHolder, "field holder cannot be null");
         try {
             field.setAccessible(true);
             return field.get(fieldHolder);
@@ -52,7 +72,6 @@ public class ReflectionUtils {
         }
     }
 
-    //todo add test
     public static List<Field> getAllFieldsOf(Object object) {
         return getAllFieldsOf(object.getClass());
     }
@@ -71,27 +90,22 @@ public class ReflectionUtils {
         return fields;
     }
 
-    //todo add test
     public static boolean isMap(Object object) {
         return Map.class.isAssignableFrom(object.getClass());
     }
 
-    //todo add test
-    public static boolean isCollection(Field field) {
-        return Collection.class.isAssignableFrom(field.getType());
-    }
-
-    //todo add test
-    public static boolean isCollection(Object object) {
-        return Collection.class.isAssignableFrom(object.getClass());
-    }
-
-    //todo add test
     public static boolean isMap(Field field) {
         return Map.class.isAssignableFrom(field.getType());
     }
 
-    //todo add test
+    public static boolean isCollection(Field field) {
+        return Collection.class.isAssignableFrom(field.getType());
+    }
+
+    public static boolean isCollection(Object object) {
+        return Collection.class.isAssignableFrom(object.getClass());
+    }
+
     public static boolean isStaticField(Field field) {
         return Modifier.isStatic(field.getModifiers());
     }

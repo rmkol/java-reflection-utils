@@ -3,11 +3,16 @@
  */
 package rk.utils.reflection.object;
 
+import java.util.List;
+import java.util.Map;
+
 public class Customer extends User {
 
     public static final String CUSTOMER_CODE = "C_CODE";
 
     public Integer number;
+    public List<String> responsibilities;
+    public Map<String,String> tasks;
     private String department;
 
     public Integer getNumber() {
