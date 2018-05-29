@@ -25,7 +25,7 @@ class Customer extends User {
     public String email;
 }
 
-List<Field> allFields = ReflectionUtils.getAllFieldsOf(Customer.class); //result list will contain both 'id' and 'name' fields
+List<Field> allFields = ReflectionUtils.getAllFieldsOf(Customer.class); //result list will contain both 'id' and 'email' fields
 ```
 
 Quickly checking field/object type:
