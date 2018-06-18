@@ -5,18 +5,18 @@ The minimum Java version supported: **8**.
 
 ### Examples
 Getting specific field by name:
-```
+```java
 Field field = ReflectionUtils.getFieldByName("email", Customer.class);
 ```
 
 Setting field value:
-```
+```java
 Field emailField = ReflectionUtils.getFieldByName("email", Customer.class);
 ReflectionUtils.setFieldValue(emailField, customer, "newemail@mail.com"); //no checked exceptions, no field unlocking
 ```
 
 Getting all class fields including fields of superclasses:
-```
+```java
 class User {
     public String id;
 }
@@ -29,7 +29,7 @@ List<Field> allFields = ReflectionUtils.getAllFieldsOf(Customer.class); //result
 ```
 
 Quickly checking field/object type:
-```
+```java
 Map map = new HashMap<String, String>();
 ReflectionUtils.isMap(map); //true
 ReflectionUtils.isCollection(map); //false
