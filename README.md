@@ -1,5 +1,5 @@
 # Java Reflection Utils
-A set of utility methods which simplify working with Java Reflection API.
+A set of utility methods which simplify work with Java Reflection API.
 The library is very lightweight (~ **5kb**) and has no external dependencies.  
 The minimum Java version supported: **8**.
 
