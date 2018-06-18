@@ -36,7 +36,7 @@ ReflectionUtils.isCollection(map); //false
 ...
 ```
 
-For more examples please see **rk.utils.reflection.ReflectionUtilsTest**.
+For more examples please see [ReflectionUtilsTest](https://github.com/rmkol/java-reflection-utils/blob/master/src/test/java/rk/utils/reflection/ReflectionUtilsTest.java) test class.
 
 ### Building
 Build the project just as a regular Maven project: `mvn package`.
